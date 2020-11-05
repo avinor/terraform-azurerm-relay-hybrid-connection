@@ -34,12 +34,12 @@ inputs {
 Output from the module is the namespace_id, map of hybrid connections and their id
 
 ```hcl-terraform
-id = /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/simple-hyco-rg/providers/Microsoft.Relay/namespaces/simple-hyco-dev-rhcn
+id = /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/simple-hyco-rg/providers/Microsoft.Relay/namespaces/simple-rhcn
 
-name = ipt-hyco-dev-rhcn
+name = simple-rhcn
 
 relay_hybrid_connections_ids = {
-  "hyco1" = "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/ipt-hyco-rg/providers/Microsoft.Relay/namespaces/simple-hyco-dev-rhcn/hybridConnections/hyco1"
+  "hyco1" = "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/simple-hyco-rg/providers/Microsoft.Relay/namespaces/simple-rhcn/hybridConnections/hyco1"
 }
 
 
@@ -50,3 +50,9 @@ relay_hybrid_connections_ids = {
 Diagnostics settings can be sent to either storage account, event hub or Log Analytics workspace. The variable `diagnostics.destination` is the id of receiver, ie. storage account id, event namespace authorization rule id or log analytics resource id. Depending on what id is it will detect where to send. Unless using event namespace the `eventhub_name` is not required, just set to `null` for storage account and log analytics workspace.
 
 Setting `all` in logs and metrics will send all possible diagnostics to destination. If not using `all` type name of categories to send.
+
+## Known issues
+Shared Access Polices on hybrid connection is not handle well because if of issue [https://github.com/terraform-providers/terraform-provider-azurerm/issues/7218](https://github.com/terraform-providers/terraform-provider-azurerm/issues/7218)
+
+This is implemented with the use of az relay command as a workaround for the lack of support in the azurerm terraform provider. 
+
