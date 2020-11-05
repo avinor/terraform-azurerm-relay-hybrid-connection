@@ -9,6 +9,12 @@ module "simple" {
     {
       name          = "hyco1",
       user_metadata = null,
+      keys = [
+        {
+          name   = "rule1",
+          rights = "Listen Manage Send"
+        }
+      ]
     }
   ]
 }

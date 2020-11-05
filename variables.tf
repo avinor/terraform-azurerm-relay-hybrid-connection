@@ -15,27 +15,16 @@ variable "hybrid_connections" {
   type = list(object({
     name          = string,
     user_metadata = string,
-    //    keys = list(object(
-    //      {
-    //        name = string, listen = bool, send = bool
-    //      }
-    //    ))
-  }))
+    keys = list(object(
+      {
+        name   = string,
+        rights = string
+      }
+    ))
+    }
+  ))
   default = []
 }
-
-//variable "authorization_rules" {
-//  description = "Authorization rules to add to the namespace. For relay hybrid connection use `relay hybrid connection ` variable to add authorization keys."
-//  type = list(object(
-//    {
-//      name   = string,
-//      listen = bool,
-//      send   = bool,
-//      manage = bool,
-//    }
-//  ))
-//  default = []
-//}
 
 variable "diagnostics" {
   description = "Diagnostic settings for those resources that support it. See README.md for details on configuration."

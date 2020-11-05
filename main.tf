@@ -11,6 +11,12 @@ locals {
 
   rhc = { for h in var.hybrid_connections : h.name => h }
 
+  keys = { for tk in flatten([for h in var.hybrid_connections :
+    [for k in h.keys : {
+      hc  = h.name
+      key = k
+  }]]) : format("%s.%s", tk.hc, tk.key.name) => tk }
+
   diag_namespace_logs = [
     "HybridConnectionsEvent",
   ]
@@ -34,6 +40,8 @@ locals {
     log                = []
   }
 }
+
+data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "arhc" {
   name     = var.resource_group_name
@@ -63,6 +71,18 @@ resource "azurerm_relay_hybrid_connection" "arhc" {
   requires_client_authorization = true
   user_metadata                 = each.value.user_metadata
 }
+
+# Use az relay command because of https://github.com/terraform-providers/terraform-provider-azurerm/issues/7218
+resource "null_resource" "authorization_rules" {
+  for_each = local.keys
+
+  provisioner "local-exec" {
+    command = "az relay hyco authorization-rule create --subscription ${data.azurerm_client_config.current.subscription_id} --resource-group ${azurerm_resource_group.arhc.name} --namespace-name ${azurerm_relay_namespace.arhc.name} --hybrid-connection-name ${each.value.hc} --name ${each.value.key.name} --rights ${each.value.key.rights}"
+  }
+
+  depends_on = [azurerm_relay_hybrid_connection.arhc]
+}
+
 
 resource "azurerm_monitor_diagnostic_setting" "namespace" {
   count                          = var.diagnostics != null ? 1 : 0

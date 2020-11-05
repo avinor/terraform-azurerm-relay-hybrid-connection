@@ -9,28 +9,24 @@ module "simple" {
     {
       name          = "hyco1",
       user_metadata = null,
-      //keys =  [
-      //    {
-      //      name   = "rule1",
-      //      listen = true,
-      //      send   = false,
-      //      manage = false,
-      //    }
+      keys = [
+        {
+          name   = "rule1",
+          rights = "Listen Manage Send",
+        }
+      ]
     },
     {
       name          = "hyco2",
       user_metadata = null,
+      keys = [
+        {
+          name   = "rule1",
+          rights = "Listen Manage Send",
+        }
+      ]
     },
   ]
-
-  //  authorization_rules = [
-  //    {
-  //      name   = "rule1",
-  //      listen = true,
-  //      send   = false,
-  //      manage = false,
-  //    }
-  //  ]
 
   diagnostics = {
     destination   = "some destination"

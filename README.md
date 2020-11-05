@@ -20,6 +20,12 @@ inputs {
       {
         name          = "hyco1",
         user_metadata = null,
+        keys = [
+          {
+            name   = "rule1",
+            rights = "Listen Manage Send",
+          }
+       ]
       },
     ]
 }
@@ -28,7 +34,15 @@ inputs {
 Output from the module is the namespace_id, map of hybrid connections and their id
 
 ```hcl-terraform
-TODO
+id = /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/simple-hyco-rg/providers/Microsoft.Relay/namespaces/simple-hyco-dev-rhcn
+
+name = ipt-hyco-dev-rhcn
+
+relay_hybrid_connections_ids = {
+  "hyco1" = "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/ipt-hyco-rg/providers/Microsoft.Relay/namespaces/simple-hyco-dev-rhcn/hybridConnections/hyco1"
+}
+
+
 ```
 
 ## Diagnostics
