@@ -12,7 +12,7 @@ module "simple" {
       keys = [
         {
           name   = "rule1",
-          rights = "Listen Manage Send",
+          rights = ["Listen", "Manage", "Send"],
         }
       ]
     },
@@ -22,7 +22,7 @@ module "simple" {
       keys = [
         {
           name   = "rule1",
-          rights = "Listen Manage Send",
+          rights = ["Listen", "Manage", "Send"],
         }
       ]
     },

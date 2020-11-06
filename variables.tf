@@ -18,7 +18,7 @@ variable "hybrid_connections" {
     keys = list(object(
       {
         name   = string,
-        rights = string
+        rights = list(string),
       }
     ))
     }

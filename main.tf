@@ -77,7 +77,7 @@ resource "null_resource" "authorization_rules" {
   for_each = local.keys
 
   provisioner "local-exec" {
-    command = "az relay hyco authorization-rule create --subscription ${data.azurerm_client_config.current.subscription_id} --resource-group ${azurerm_resource_group.arhc.name} --namespace-name ${azurerm_relay_namespace.arhc.name} --hybrid-connection-name ${each.value.hc} --name ${each.value.key.name} --rights ${each.value.key.rights}"
+    command = "az relay hyco authorization-rule create --subscription ${data.azurerm_client_config.current.subscription_id} --resource-group ${azurerm_resource_group.arhc.name} --namespace-name ${azurerm_relay_namespace.arhc.name} --hybrid-connection-name ${each.value.hc} --name ${each.value.key.name} --rights ${join(" ", each.value.key.rights)}"
   }
 
   depends_on = [azurerm_relay_hybrid_connection.arhc]
