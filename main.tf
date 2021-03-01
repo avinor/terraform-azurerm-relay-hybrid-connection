@@ -1,9 +1,9 @@
 terraform {
-  required_version = ">= 0.12.0"
+  required_version = ">= 0.12.6"
 }
 
 provider azurerm {
-  version = "~> 2.34.0"
+  version = "~> 2.49.0"
   features {}
 }
 
