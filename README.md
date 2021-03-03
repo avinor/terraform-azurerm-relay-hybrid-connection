@@ -8,7 +8,7 @@ Example showing deployment of a namespace with a singe hybrid connection using [
 
 ```hcl-terraform
 module {
-    source = "github.com/avinor/terraform-azurerm-relay-hybrid-connection?ref=master"
+    source = "github.com/avinor/terraform-azurerm-relay-hybrid-connection?ref=v0.1.0"
 }
 
 inputs {
@@ -18,12 +18,12 @@ inputs {
 
     relay_hybrid_connections = [
       {
-        name          = "hyco1",
-        user_metadata = null,
+        name          = "hyco1"
+        user_metadata = null
         keys = [
           {
-            name   = "rule1",
-            rights = "Listen Manage Send",
+            name   = "rule1"
+            rights = "Listen Manage Send"
           }
        ]
       },

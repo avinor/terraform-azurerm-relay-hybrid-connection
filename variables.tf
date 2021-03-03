@@ -13,11 +13,11 @@ variable "location" {
 variable "hybrid_connections" {
   description = "List of hybrid connections"
   type = list(object({
-    name          = string,
-    user_metadata = string,
+    name          = string
+    user_metadata = string
     keys = list(object(
       {
-        name   = string,
+        name   = string
         rights = string
       }
     ))
@@ -30,9 +30,9 @@ variable "diagnostics" {
   description = "Diagnostic settings for those resources that support it. See README.md for details on configuration."
   type = object(
     {
-      destination   = string,
-      eventhub_name = string,
-      logs          = list(string),
+      destination   = string
+      eventhub_name = string
+      logs          = list(string)
       metrics       = list(string)
     }
   )

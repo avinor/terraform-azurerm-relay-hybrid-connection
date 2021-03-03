@@ -1,28 +1,29 @@
 module "simple" {
+
   source = "../../"
 
   name                = "complex"
-  resource_group_name = "complex-hyco-rg"
+  resource_group_name = "complex-arch-rg"
   location            = "westeurope"
 
   hybrid_connections = [
     {
-      name          = "hyco1",
-      user_metadata = null,
+      name          = "arhc1"
+      user_metadata = null
       keys = [
         {
-          name   = "rule1",
-          rights = "Listen Manage Send",
+          name   = "rule1"
+          rights = "Listen Manage Send"
         }
       ]
     },
     {
-      name          = "hyco2",
-      user_metadata = null,
+      name          = "arhc2"
+      user_metadata = null
       keys = [
         {
-          name   = "rule1",
-          rights = "Listen Manage Send",
+          name   = "rule2"
+          rights = "Listen Manage Send"
         }
       ]
     },

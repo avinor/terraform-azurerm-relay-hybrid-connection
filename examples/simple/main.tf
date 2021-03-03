@@ -1,17 +1,18 @@
 module "simple" {
+
   source = "../../"
 
   name                = "simple"
-  resource_group_name = "simple-hyco-rg"
+  resource_group_name = "simple-arhc-rg"
   location            = "westeurope"
 
   hybrid_connections = [
     {
-      name          = "hyco1",
-      user_metadata = null,
+      name          = "arch"
+      user_metadata = null
       keys = [
         {
-          name   = "rule1",
+          name   = "rule"
           rights = "Listen Manage Send"
         }
       ]
